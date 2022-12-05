@@ -4,7 +4,8 @@ import Menu from './components/Menu';
 import Navbar from './components/Navbar';
 
 const Container = styled.div`
-display : flex`;
+display : flex;
+`;
 const Main = styled.div`
 flex :7
 `;
