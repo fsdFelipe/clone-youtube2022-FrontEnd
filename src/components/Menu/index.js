@@ -20,9 +20,9 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 
 const Container = styled.div`
 flex : 1;
-background-color: #202020;
+background-color: ${({theme}) => theme.bg};
 height: 100vh;
-color: white;
+color: ${({theme}) => theme.text};;
 font-size: 14px;
 position: sticky;
 top: 0;
@@ -54,7 +54,7 @@ padding: 7.5px 0px;
 
 const Hr = styled.hr`
 margin: 15px 0px;
-border: 0.5px solid #373737;
+border: 0.5px solid ${({theme}) => theme.soft};
 `
 const Login = styled.div``;
 const Button = styled.button`
@@ -71,7 +71,14 @@ const Button = styled.button`
   gap: 5px;
 `;
 
-function Menu() {
+const Title = styled.h2`
+font-size: 14px;
+font-weight: 500;
+color: #aaaaaa;
+margin-buttom: 20px;
+`
+
+function Menu({darkMode, setDarkMode}) {
   return (
     <Container>
       <Wrapper>
@@ -109,6 +116,7 @@ function Menu() {
             </Button>
         </Login>
         <Hr />
+        <Title>MyTube Videos</Title>
         <Item>
           <LibraryMusicOutlinedIcon />
           Music
@@ -146,9 +154,9 @@ function Menu() {
           <HelpOutlineOutlinedIcon />
           Help
         </Item>
-        <Item >
+         <Item onClick={() => setDarkMode(!darkMode)}>
           <SettingsBrightnessOutlinedIcon />
-           Mode
+          {darkMode ? "Light" : "Dark"} Mode
         </Item>
       </Wrapper>
     </Container>
