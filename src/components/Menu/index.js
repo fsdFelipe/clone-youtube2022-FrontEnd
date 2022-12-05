@@ -1,6 +1,21 @@
 import React from "react";
 import styled from 'styled-components';
 import MyTube from '../../assets/img/logo.png'
+import HomeIcon from '@mui/icons-material/Home';
+import ExploreIcon from '@mui/icons-material/Explore';
+import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
+import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
+import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
+import LibraryMusicOutlinedIcon from "@mui/icons-material/LibraryMusicOutlined";
+import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined";
+import SportsBasketballOutlinedIcon from "@mui/icons-material/SportsBasketballOutlined";
+import MovieOutlinedIcon from "@mui/icons-material/MovieOutlined";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 
 const Container = styled.div`
 flex : 1;
@@ -26,6 +41,19 @@ const Img = styled.img`
 height : 25px;
 `; 
 
+const Item = styled.div`
+display : flex;
+align-items: center;
+gap: 20px;
+cursor: pointer;
+padding: 7.5px 0px;
+`; 
+
+const Hr = styled.hr`
+margin: 15px 0px;
+border: 0.5px solid #373737;
+`
+
 function Menu() {
   return (
     <Container>
@@ -34,6 +62,69 @@ function Menu() {
           <Img src={MyTube}/>
           MyTube
         </Logo>
+        <Item>
+          <HomeIcon/>
+          Home
+        </Item>
+        <Item>
+          <ExploreIcon/>
+          Explore
+        </Item>
+        <Item>
+          <SubscriptionsOutlinedIcon />
+          Subscriptions
+        </Item>
+        <Hr />
+        <Item>
+          <VideoLibraryOutlinedIcon />
+          Library
+        </Item>
+        <Item>
+          <HistoryOutlinedIcon />
+          History
+        </Item>
+        <Hr />
+        <Item>
+          <LibraryMusicOutlinedIcon />
+          Music
+        </Item>
+        <Item>
+          <SportsBasketballOutlinedIcon />
+          Sports
+        </Item>
+        <Item>
+          <SportsEsportsOutlinedIcon />
+          Gaming
+        </Item>
+        <Item>
+          <MovieOutlinedIcon />
+          Movies
+        </Item>
+        <Item>
+          <ArticleOutlinedIcon />
+          News
+        </Item>
+        <Item>
+          <LiveTvOutlinedIcon />
+          Live
+        </Item>
+        <Hr />
+        <Item>
+          <SettingsOutlinedIcon />
+          Settings
+        </Item>
+        <Item>
+          <FlagOutlinedIcon />
+          Report
+        </Item>
+        <Item>
+          <HelpOutlineOutlinedIcon />
+          Help
+        </Item>
+        <Item >
+          <SettingsBrightnessOutlinedIcon />
+           Mode
+        </Item>
       </Wrapper>
     </Container>
   );
