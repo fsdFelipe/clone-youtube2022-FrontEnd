@@ -20,7 +20,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 
 const Container = styled.div`
 flex : 1;
-background-color: ${({theme}) => theme.bgLighter};
+background-color: ${({theme}) => theme.bg};
 height: 100vh;
 color: ${({theme}) => theme.text};;
 font-size: 14px;
