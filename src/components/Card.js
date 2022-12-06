@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
 width: 360px;
@@ -49,6 +50,7 @@ color: ${({theme}) => theme.textSoft};
 
 const Card = () => {
     return(
+        <Link to="/video/test" style={{textDecoration: 'none'}}>
         <Container>
             <Image src="https://www.ipm.com.br/wp-content/uploads/2021/03/26-02-imagem-blog-2.png" />
             <Details>
@@ -60,6 +62,7 @@ const Card = () => {
                 </Texts>
             </Details>
         </Container>
+        </Link>
     )
 }
 
