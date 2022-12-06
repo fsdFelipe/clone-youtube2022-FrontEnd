@@ -4,6 +4,12 @@ import Menu from './components/Menu';
 import Navbar from './components/Navbar';
 import { darkTheme, lightTheme } from "./utils/theme";
 import { useState } from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  BrowserRouter,
+} from "react-router-dom";
 
 const Container = styled.div`
 display : flex;
@@ -20,42 +26,22 @@ const [darkMode, setDarkMode] = useState(true)
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
     <Container>
+      <BrowserRouter>
       <Menu darkMode= {darkMode} setDarkMode={setDarkMode}/>
       <Main>
         <Navbar />
         <Wrapper>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
+          <Routes>
+            <Route path='/'>
+              <Route index element={Home}/>
+              <Route path='video'>
+                <Route path='id' element={Video}/>
+              </Route>
+            </Route>
+          </Routes>
         </Wrapper>
       </Main>
+      </BrowserRouter>
     </Container>
     </ThemeProvider>
   );
