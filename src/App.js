@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Home from './page/Home';
 import Video from './page/Home/Video';
+import SignIn from './page/SignIn';
 
 const Container = styled.div`
 display : flex;
@@ -37,6 +38,7 @@ const [darkMode, setDarkMode] = useState()
           <Routes>
             <Route path='/'>
               <Route index element={<Home />}/>
+              <Route path='signin' element={<SignIn />}/>
               <Route path='video'>
                 <Route path=':id' element={<Video />}/>
               </Route>
