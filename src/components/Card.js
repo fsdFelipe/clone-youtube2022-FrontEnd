@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import {format} from "timeago.js";
+import axios from "axios";
 
 const Container = styled.div`
 width: ${(props) => props.type !== 'sm' && '360px'};
@@ -53,17 +55,30 @@ font-size: 14px;
 color: ${({theme}) => theme.textSoft};
 `;
 
-const Card = ({type}) => {
+const Card = ({type, video}) => {
+
+    const [channel, setChannel] = useState({})
+
+   useEffect(() =>{
+    const fetchChannel = async () =>{
+        const res = await axios.get(`/usuarios/find/${video.userId}`)
+        setChannel(res.data)
+    }
+    fetchChannel()
+   },[video.userId])
+
     return(
         <Link to="/video/test" style={{textDecoration: 'none'}}>
         <Container type={type}>
-            <Image type={type} src="https://www.ipm.com.br/wp-content/uploads/2021/03/26-02-imagem-blog-2.png" />
+            <Image type={type} src={video.imgUrl} />
             <Details type={type}>
-                <ChannelImage type={type} src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Black-Magic-Big-Boy.jpg"/>
+                <ChannelImage 
+                type={type} 
+                src={channel.img}/>
                 <Texts>
-                    <Title>Teste video</Title>
-                    <CnannelName>Felipe Dias</CnannelName>
-                    <Info>12345 views  - 1 day ago</Info>
+                    <Title>{video.title}</Title>
+                    <CnannelName>{channel.nome}</CnannelName>
+                    <Info>{video.views} views  - {format(video.createdAt)}</Info>
                 </Texts>
             </Details>
         </Container>
