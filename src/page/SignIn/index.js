@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import styled from "styled-components";
 //import { Links, Link } from "react-router-dom";
 
@@ -64,18 +65,32 @@ margin-left: 30px;
 `;
 
 const SignIn = () => {
+    const [nome, setNome] = useState("")
+    const [email, setEmail] = useState("")
+    const [senha, setSenha] = useState("")
+
+    const handleLogin = async (e) =>{
+        e.preventDefault();
+        try {
+            const res = await axios.post("/auth/signin", {nome, senha})
+            console.log(res.data)
+        } catch (error) {
+            
+        }
+    }
+
     return(
         <Container>
             <Wrapper>
                 <Title>Sign in</Title>
                 <SubTitle>To continue to MyTube</SubTitle>
-                <Input placeholder="username"/>
-                <Input type="password" placeholder="password"/>
-                <Button>Sign in</Button>
+                <Input placeholder="username" onChange={e => setNome(e.target.value)} />
+                <Input type="password" placeholder="password" onChange={e => setSenha(e.target.value)} />
+                <Button onClick={handleLogin}>Sign in</Button>
                 <Title>or</Title>
-                <Input placeholder="username"/>
-                <Input type="email" placeholder="email"/>
-                <Input type="password" placeholder="password"/>
+                <Input placeholder="username" onChange={e => setNome(e.target.value)} />
+                <Input type="email" placeholder="email" onChange={e => setEmail(e.target.value)} />
+                <Input type="password" placeholder="password" onChange={e => setSenha(e.target.value)} />
                 <Button>Sign up</Button>
             </Wrapper>
             <More>
