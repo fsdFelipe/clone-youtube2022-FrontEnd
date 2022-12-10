@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined'
 import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined'
@@ -6,6 +6,11 @@ import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined'
 import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined'
 import Comments from "../../components/Comments";
 import Card from "../../components/Card";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { format } from "timeago.js";
+import { fetchSuccess } from "../../redux/videoSlice";
 
 const Container = styled.div`
 display: flex;
@@ -106,6 +111,29 @@ cursor: pointer;
 `;
 
 const Video = () => {
+    const {currentUser} = useSelector((state) => state.user)
+    const {currentVideo} = useSelector((state) => state.video)
+
+    const dispatch = useDispatch();
+    const path = useLocation().pathname.split("/")[2];
+
+    const [channel, setChannel] = useState({})
+
+    useEffect (() =>{
+        const fetchData = async () => {
+            try {
+                const videoRes = await axios.get(`/videos/find/${path}`)
+                const channelRes = await axios.get(`/usuarios/find/${videoRes.userId}`)
+                setChannel(channelRes.data)
+                dispatch(fetchSuccess(videoRes.data));
+            } catch (error) {
+                
+            }
+        }
+        fetchData();
+        console.log(dispatch)
+    },[path, dispatch])
+
     return(
         <Container>
             <Content>
@@ -117,11 +145,11 @@ const Video = () => {
                 allowfullscreen>
                 </iframe>
             </VideoWrapper>
-            <Title>Video Teste</Title>
+            <Title>{currentVideo?.title}</Title>
             <Details>
-                <Info>54321 views - dec 06, 2022</Info>
+                <Info>{currentVideo?.views} views - {format(currentVideo?.createdAt)}</Info>
                 <Buttons>
-                    <Button><ThumbUpOutlinedIcon /> 1234</Button>
+                    <Button><ThumbUpOutlinedIcon /> {currentVideo?.like?.length}</Button>
                     <Button>
                         <ThumbDownOffAltOutlinedIcon /> Dislike
                     </Button>
@@ -136,12 +164,12 @@ const Video = () => {
             <Hr />
             <Channel>
                 <ChannelInfo>
-                    <Image src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Black-Magic-Big-Boy.jpg" />
+                    <Image src={channel?.img}/>
                     <ChannelDetail>
-                        <ChannelName>Felipe</ChannelName>
-                        <ChannelCounter>1 subscriber</ChannelCounter>
-                        <Description> Descrição do canal apenas para ter um texto mesmo.
-                            Escrevendo qualquer coisa, para ver o resultado na pagina de video
+                        <ChannelName>{channel?.nome}</ChannelName>
+                        <ChannelCounter>{channel?.subscribers} subscribers</ChannelCounter>
+                        <Description> 
+                            {currentVideo?.desc}
                         </Description>
                     </ChannelDetail>
                 </ChannelInfo>
@@ -150,7 +178,7 @@ const Video = () => {
             <Hr />
             <Comments />
             </Content>
-            <Recomendation>
+         {/*  <Recomendation>
                 <Card type='sm'/>
                 <Card type='sm'/>
                 <Card type='sm'/>
@@ -165,7 +193,7 @@ const Video = () => {
                 <Card type='sm'/>
                 <Card type='sm'/>
                 <Card type='sm'/>
-            </Recomendation>
+    </Recomendation> */}
         </Container>
     )
 }
