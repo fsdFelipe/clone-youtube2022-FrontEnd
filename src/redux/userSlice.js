@@ -26,6 +26,7 @@ export const userSlice = createSlice({
       state.loading = false;
       state.error = false;
     },
+    //add a partir dessa linha
     subscription: (state, action) => {
       if (state.currentUser.subscribedUsers.includes(action.payload)) {
         state.currentUser.subscribedUsers.splice(

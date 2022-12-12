@@ -23,10 +23,10 @@ export const videoSlice = createSlice({
     },
     //adicionando
     like: (state, action) => {
-      if (!state.currentVideo.likes.includes(action.payload)) {
-        state.currentVideo.likes.push(action.payload);
-        state.currentVideo.dislikes.splice(
-          state.currentVideo.dislikes.findIndex(
+      if (!state.currentVideo.like.includes(action.payload)) {
+        state.currentVideo.like.push(action.payload);
+        state.currentVideo.dislike.splice(
+          state.currentVideo.dislike.findIndex(
             (userId) => userId === action.payload
           ),
           1
@@ -34,10 +34,10 @@ export const videoSlice = createSlice({
       }
     },
     dislike: (state, action) => {
-      if (!state.currentVideo.dislikes.includes(action.payload)) {
-        state.currentVideo.dislikes.push(action.payload);
-        state.currentVideo.likes.splice(
-          state.currentVideo.likes.findIndex(
+      if (!state.currentVideo.dislike.includes(action.payload)) {
+        state.currentVideo.dislike.push(action.payload);
+        state.currentVideo.like.splice(
+          state.currentVideo.like.findIndex(
             (userId) => userId === action.payload
           ),
           1
