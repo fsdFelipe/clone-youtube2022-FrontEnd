@@ -21,6 +21,7 @@ export const videoSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
+    //adicionando
     like: (state, action) => {
       if (!state.currentVideo.likes.includes(action.payload)) {
         state.currentVideo.likes.push(action.payload);
