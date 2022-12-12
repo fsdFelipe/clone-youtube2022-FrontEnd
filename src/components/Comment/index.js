@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -31,14 +32,24 @@ const Text = styled.span`
 font-size: 14px;
 `
 
-const Comment = () => {
+const Comment = ({comment}) => {
+    const [channel, setChannel] = useState({})
+
+    useEffect(() =>{
+        const fetchComment = async () =>{
+            const res = await axios.post(
+              `/usuarios/find/${comment?.userId}`)
+              setChannel(res?.data)
+        }
+        fetchComment()
+    }, [comment?.userId])
     return(
         <Container>
-         <Avatar src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Black-Magic-Big-Boy.jpg"/>
+         <Avatar src={channel.img}/>
          <Details>
-            <Name>Felipe <Date>1 day ago</Date></Name>
+            <Name>{channel?.nome}<Date>1 day ago</Date></Name>
             <Text>
-                Comentario  exemplo, teste para ver se o componente esta funcionando corretamente
+             {comment?.desc}
             </Text>
          </Details>
         </Container>
