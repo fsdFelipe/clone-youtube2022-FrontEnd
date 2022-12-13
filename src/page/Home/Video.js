@@ -7,13 +7,13 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown'
 import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined'
 import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined'
 import Comments from "../../components/Comments";
-import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { format } from "timeago.js";
 import { dislike, fetchSuccess, like } from "../../redux/videoSlice";
 import { subscription } from "../../redux/userSlice";
+import Recomendation from "../../components/Recomendation";
 
 const Container = styled.div`
 display: flex;
@@ -61,10 +61,6 @@ cursor: pointer;
 const Hr = styled.hr`
 border: 0.5px solid ${({ theme}) => theme.soft};
 margin-top: 15px 0px;
-`;
-
-const Recomendation = styled.div`
-flex: 2;
 `;
 
 const Channel = styled.div`
@@ -210,22 +206,7 @@ const Video = () => {
             <Hr />
             <Comments videoId={currentVideo?._id}/>
             </Content>
-         {/*  <Recomendation>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-                <Card type='sm'/>
-    </Recomendation> */}
+          <Recomendation tags={currentVideo?.tags} />
         </Container>
     )
 }
