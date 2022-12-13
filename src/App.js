@@ -12,6 +12,7 @@ import {
 import Home from './page/Home';
 import Video from './page/Home/Video';
 import SignIn from './page/SignIn';
+import Search from './page/Home/Search';
 
 const Container = styled.div`
 display : flex;
@@ -40,6 +41,7 @@ const [darkMode, setDarkMode] = useState()
               <Route index element={<Home type="random" />}/>
               <Route path='trends' element={<Home type="trend" />}/>
               <Route path='subscriptions' element={<Home type="sub" />}/>
+              <Route path='search' element={<Search />}/>
               <Route path='signin' element={<SignIn />}/>
               <Route path='/video'>
                 <Route path=':id' element={<Video />}/>

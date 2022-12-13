@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import VideoCallOutlinedIcon from '@mui/icons-material/VideoCallOutlined'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Upload from "../Upload";
 
@@ -21,7 +21,7 @@ padding: 0px 20px;
 justify-content: flex-end;
 `;
 const Search = styled.div`
- width: 40%;
+  width: 40%;
   position: absolute;
   left: 0px;
   right: 0px;
@@ -32,6 +32,7 @@ const Search = styled.div`
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  color: ${({ theme }) => theme.text};
 `;
 const Input = styled.input`
   border: none;
@@ -68,15 +69,17 @@ const Avatar = styled.img`
 `;
 
 const Navbar = () =>{
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
+  const [q, setQ] = useState("")
   const {currentUser} = useSelector(state => state.user)
     return(
       <>
         <Container>
             <Wrapper>
                 <Search>
-                <Input placeholder="search"/>
-                <SearchOutlinedIcon />
+                <Input placeholder="search" onChange={(e) => setQ(e.target.value)}/>
+                <SearchOutlinedIcon onClick={()=>navigate(`/search?busca=${q}`)} />
                 </Search>
           {currentUser ? (
             <User>
